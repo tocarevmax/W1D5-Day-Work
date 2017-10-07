@@ -43,12 +43,13 @@ class KnightPathFinder
     result = []
     result_node = root.dfs(pos)
 
-    queue = [root]
-    until queue.empty?
+    queue = [result_node]
+    until queue.empty? || queue[0] == @root
       current_el = queue.shift
-      queue.push(current_el.parent)
+      result << current_el.value
+      queue << current_el.parent
     end
-    result
+    [root.value] + result.reverse
   end
 
 end
@@ -56,7 +57,7 @@ end
 knight = KnightPathFinder.new
 # knight.build_move_tree
 
-p knight.find_path([2,1])
+p knight.find_path([6, 2])
 
 # p knight.root.bfs([2, 4]).children.count
 
